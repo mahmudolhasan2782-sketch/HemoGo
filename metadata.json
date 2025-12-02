@@ -1,0 +1,8 @@
+{
+  "name": "HemoGo",
+  "description": "A hybrid Social Networking and Learning Platform for accounting students.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
