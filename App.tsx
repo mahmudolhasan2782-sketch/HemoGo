@@ -16,6 +16,9 @@ const INITIAL_USER: User = {
   rank: 'Starter'
 };
 
+// Image provided by user (Professional Man in Suit)
+const FOUNDER_IMAGE = "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80";
+
 const App: React.FC = () => {
   const [view, setView] = useState<ViewState>(ViewState.FEED);
   const [user, setUser] = useState<User>(INITIAL_USER);
@@ -60,12 +63,33 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row text-gray-900 font-sans">
       
       {/* DESKTOP SIDEBAR */}
-      <aside className="hidden md:flex flex-col w-64 bg-white border-r h-screen sticky top-0 z-20">
+      <aside className="hidden md:flex flex-col w-64 bg-white border-r h-screen sticky top-0 z-20 shadow-sm">
         <div className="p-6 flex items-center border-b border-gray-100">
-           <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center mr-3 shadow-lg">
-             <GraduationCap className="text-white w-5 h-5" />
+           {/* Logo */}
+           <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center mr-3 shadow-lg transform rotate-3 hover:rotate-0 transition-transform">
+             <GraduationCap className="text-white w-6 h-6" />
            </div>
-           <span className="text-xl font-bold text-gray-800 tracking-tight">HemoGo</span>
+           
+           {/* Brand Text */}
+           <div className="flex-1">
+             <span className="text-xl font-extrabold text-gray-800 tracking-tight block leading-none">HemoGo</span>
+             <span className="text-[10px] font-semibold text-indigo-500 tracking-wider uppercase">Learn & Social</span>
+           </div>
+
+           {/* Founder Image (Requested) */}
+           <div className="relative group cursor-pointer ml-2">
+             <div className="w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-yellow-400 to-indigo-600">
+                <img 
+                  src={FOUNDER_IMAGE} 
+                  className="w-full h-full rounded-full border-2 border-white object-cover" 
+                  alt="Founder" 
+                />
+             </div>
+             {/* Tooltip */}
+             <div className="absolute left-1/2 -translate-x-1/2 top-12 bg-gray-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+               Founder
+             </div>
+           </div>
         </div>
         
         <nav className="flex-1 px-4 py-6">
@@ -87,9 +111,29 @@ const App: React.FC = () => {
         </div>
       </aside>
 
+      {/* MOBILE TOP HEADER (New Addition for Logo/Image visibility) */}
+      <div className="md:hidden bg-white border-b border-gray-200 p-3 px-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
+         <div className="flex items-center">
+           <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center mr-2 shadow-sm">
+             <GraduationCap className="text-white w-5 h-5" />
+           </div>
+           <span className="text-lg font-extrabold text-gray-800 tracking-tight">HemoGo</span>
+         </div>
+         
+         <div className="flex items-center">
+            <span className="text-[10px] font-bold text-gray-400 mr-2 uppercase tracking-wide">Founder</span>
+            <div className="w-9 h-9 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-400 to-indigo-600">
+               <img 
+                 src={FOUNDER_IMAGE} 
+                 className="w-full h-full rounded-full border border-white object-cover" 
+                 alt="Founder" 
+               />
+            </div>
+         </div>
+      </div>
+
       {/* MAIN CONTENT AREA */}
-      <main className="flex-1 h-screen overflow-y-auto relative no-scrollbar">
-         {/* Top Header (Desktop Only) - Optional for search/notifications, keeping clean for now */}
+      <main className="flex-1 h-[calc(100vh-60px)] md:h-screen overflow-y-auto relative no-scrollbar">
          
          <div className={`mx-auto ${view === ViewState.CHAT ? 'h-full max-w-full p-0 md:p-6' : 'w-full px-0 md:px-8 pb-24 md:pb-8'}`}>
             {view === ViewState.FEED && (
